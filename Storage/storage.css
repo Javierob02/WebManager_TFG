@@ -1,0 +1,253 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6;
+}
+
+.container {
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    background-color: #e4e7eb;
+    margin-right: 10px;
+}
+
+.tab.active {
+    background-color: #ff3f3f;
+}
+
+
+.body-container {
+    border-radius: 8px 8px 8px 8px;
+    background-color: #e4e7eb;
+    padding: 5px;
+}
+
+.add-container {
+    display: flex;
+    justify-content: right;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#addBTN, #logoutBTN {
+    border-radius: 8px 8px 8px 8px;
+    background-color: #f52904;
+    margin: 10px;
+    right: 20px;
+}
+
+#changeHomeBTN {
+    border-radius: 8px 8px 8px 8px;
+    margin: 10px;
+    right: 20px;
+}
+
+
+button {
+    border: none; /* Remove default button borders */
+    background-color: #333; /* Use a dark gray background color */
+    padding: 10px 20px; /* Add padding for better button size */
+    font-size: 1rem; /* Set font size for buttons */
+    font-weight: bold; /* Make buttons bold */
+    cursor: pointer; /* Indicate clickable behavior */
+    margin-left: 10px; /* Add some space between buttons */
+    border-radius: 3px; /* Add rounded corners to buttons */
+    transition: background-color 0.2s ease-in-out; /* Add smooth background color transition on hover */
+}
+button:hover {
+    background-color: #222; /* Change background color to a darker shade on hover */
+}
+button:first-child { /* Style the first button (usually Cancel) */
+    background-color: #ddd; /* Use a light gray background color */
+    color: #333; /* Use dark gray text color */
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #100f0f;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #d4d7da;
+}
+
+.delete-icon, .edit-icon {
+    cursor: pointer;
+}
+
+.delete-icon::before {
+    content: '🗑';
+}
+
+.edit-icon::before {
+    content: '✎';
+}
+
+
+
+
+
+
+
+.modal {
+    display: none; /* Initially hidden */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scrolling if modal content overflows */
+    background-color: rgba(0,0,0,0.4); /* Transparent background with opacity */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%; /* Adjust width as needed */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: fadeIn; /* Optional: Add animation for smooth appearance */
+    animation-duration: 0.4s;
+    border-radius: 10px;
+}
+
+.modal-header {
+    display: flex; /* Arrange title and close button horizontally */
+    justify-content: space-between; /* Space elements evenly */
+    align-items: center; /* Vertically align elements */
+    padding-bottom: 15px; /* Add some padding below the header */
+}
+
+.modal-title {
+    font-size: 1.2rem; /* Increase title font size */
+    font-weight: bold; /* Make title bolder */
+    margin: 0; /* Remove default margin */
+}
+#deleteTitle {
+    color: #f52904;
+}
+
+.close-button {
+    border: none; /* Remove default button border */
+    background-color: transparent; /* Transparent background */
+    font-size: 2.1rem; /* Increase close button font size */
+    font-weight: bold; /* Make close button bolder */
+    cursor: pointer; /* Indicate clickable behavior */
+    color: #aaa; /* Use a light gray color */
+    transition: color 0.2s ease-in-out; /* Add smooth color transition on hover */
+}
+
+.close-button:hover {
+    text-shadow: 0 0 1px #333; /* Dark gray shadow on hover */
+}
+
+#deleteBody {
+    text-align: center; /* Center the body text */
+}
+
+#deleteBody label { /* Style all labels */
+    display: block; /* Display each label on a new line */
+    margin-bottom: 5px; /* Add some space between labels */
+}
+
+#deleteBody label:nth-child(1) { /* Style the first label (question) */
+    font-weight: bold; /* Make the question bold */
+}
+
+#deleteBody span { /* Style the bold table and row ID */
+    font-weight: bold;
+}
+
+
+
+label {
+    display: block; /* Display labels on separate lines */
+    margin-bottom: 5px; /* Add some space between labels and inputs */
+    font-weight: bold;
+}
+#labelDelete {
+    font-weight: normal;
+}
+
+input[type="text"] {
+    width: 100%; /* Make input fields take up full width */
+    margin-bottom: 5px;
+    padding: 10px; /* Add padding for better user interaction */
+    border: 1px solid #ccc; /* Add a light gray border */
+    border-radius: 3px; /* Add rounded corners to input fields */
+    font-size: 1rem; /* Set font size for inputs */
+}
+input[type="textarea"] {
+    width: 100%; /* Make input fields take up full width */
+    margin-bottom: 5px;
+    padding: 10px; /* Add padding for better user interaction */
+    border: 1px solid #ccc; /* Add a light gray border */
+    border-radius: 3px; /* Add rounded corners to input fields */
+    font-size: 1rem; /* Set font size for inputs */
+    resize: vertical;
+}
+#deleteBody {
+    justify-content: center;
+}
+
+.modal-footer {
+    display: flex; /* Arrange buttons horizontally */
+    justify-content: flex-end; /* Align buttons to the right */
+    padding-top: 15px; /* Add some padding above the footer */
+}
+
+
+#deleteButton { /* Style the Delete button */
+    border: none; /* Remove default button borders */
+    background-color: #ff3f3f; /* Use a dark gray background color */
+    color: #fff; /* Use white text color */
+    padding: 10px 20px; /* Add padding for better button size */
+    font-size: 1rem; /* Set font size for buttons */
+    font-weight: bold; /* Make buttons bold */
+    cursor: pointer; /* Indicate clickable behavior */
+    margin-left: 10px; /* Add some space between buttons */
+    border-radius: 3px; /* Add rounded corners to buttons */
+    transition: background-color 0.2s ease-in-out; /* Add smooth background color transition on hover */
+}
+
+#deleteButton:hover {
+    background-color: #c9302c; /* Darker red on hover */
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

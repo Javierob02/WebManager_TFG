@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage Manager</title>
+    <link rel="stylesheet" href="storage.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="storage.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="logout-container">
+        <button onclick=window.location.href="../Home/home.html" id="changeHomeBTN" type="button">DB Manager<i class='fas fa-database' style='margin-left: 2px'></i></button>
+        <button onclick="logoutPage()" id="logoutBTN" type="button">Logout&nbsp;<svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"/></svg></button>
+    </div>
+    <div class="title">Storage Manager</div>
+
+        <div class="tabs">
+            <div id="cars" class="tab" onclick="showTable('cars')">Cars</div>
+            <div id="circuits" class="tab" onclick="showTable('circuits')">Circuits</div>
+            <div id="drivers" class="tab" onclick="showTable('drivers')">Drivers</div>
+            <div id="flags" class="tab" onclick="showTable('flags')">Flags</div>
+            <div id="logos" class="tab" onclick="showTable('logos')">Logos</div>
+            <div id="news" class="tab" onclick="showTable('news')">News</div>
+            <div id="test" class="tab" onclick="showTable('test')">Test</div>
+        </div>
+
+    <div class="body-container">
+        <div class="body-container">
+            <div class="add-container">
+                <button id="addBTN" type="button">+ Add Image</button>
+            </div>
+
+            <table id="table-cars"></table>
+
+            <table id="table-circuits" style="display:none;"></table>
+
+            <table id="table-drivers" style="display:none;"></table>
+
+            <table id="table-flags" style="display:none;"></table>
+
+            <table id="table-logos" style="display:none;"></table>
+
+            <table id="table-news" style="display:none;"></table>
+
+            <table id="table-test" style="display:none;"></table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
