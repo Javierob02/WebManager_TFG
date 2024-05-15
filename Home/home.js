@@ -191,17 +191,6 @@ function showAddModal(tableName) {
     });
     modalFooter.appendChild(cancelButton);
 
-    const addButton = document.createElement("button");
-    addButton.textContent = "Add";
-    // Add functionality for the Add button based on your requirements (e.g., form submission, data processing)
-    addButton.addEventListener("click", function() {
-        addRecord(tableName)
-        modalContainer.style.display = "none";
-        modalContainer.remove();
-        window.location.reload();
-    });
-    modalFooter.appendChild(addButton);
-
     // Assemble the modal content
     modalContent.appendChild(modalHeader);
     modalContent.appendChild(modalBody);
