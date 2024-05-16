@@ -211,6 +211,7 @@ function showDeleteModal(tableName, file) {
     deleteButton.id = "deleteButton"
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", function() {
+        deleteButton.disabled = true;
         fetch('http://localhost:3000/api/deleteFile/' + tableName + '/' + file, {
             method: 'DELETE'
         })

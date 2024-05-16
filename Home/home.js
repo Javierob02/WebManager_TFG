@@ -195,6 +195,7 @@ function showAddModal(tableName) {
     addButton.textContent = "Add";
     // Add functionality for the Add button based on your requirements (e.g., form submission, data processing)
     addButton.addEventListener("click", function() {
+        addButton.disabled = true;
         addRecord(tableName)
         modalContainer.style.display = "none";
         modalContainer.remove();
@@ -314,6 +315,7 @@ function showEditModal(tableName, rowId) {
     editButton.textContent = "Confirm";
     // Add functionality for the Add button based on your requirements (e.g., form submission, data processing)
     editButton.addEventListener("click", function() {
+        editButton.disabled = true;
         editRecord(tableName, getIdName(tableName), jsonData[rowId-1][getIdName(tableName)]);
         modalContainer.style.display = "none";
         modalContainer.remove();
@@ -321,6 +323,7 @@ function showEditModal(tableName, rowId) {
     });
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
+            editButton.disabled = true;
             editRecord(tableName, getIdName(tableName), jsonData[rowId-1][getIdName(tableName)]);
             modalContainer.style.display = "none";
             modalContainer.remove();
@@ -405,6 +408,7 @@ function showDeleteModal(tableName, rowID) {
     deleteButton.id = "deleteButton"
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", function() {
+        deleteButton.disabled = true;
         deleteRecord(tableName, jsonData[rowID-1][getIdName(tableName)]);
         modalContainer.style.display = "none";
         modalContainer.remove();
