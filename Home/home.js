@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
+    //--------- START AUTH CHECK ---------
+    const cookies = document.cookie.split('; ');
+    const userIdCookie = cookies.find(cookie => cookie.startsWith('ManagerUserId='));
+    const contentElement = document.getElementById('content');
+    document.body.style.display = 'none'; // Initially hide the content
+
+    if (userIdCookie) {
+        // If the session cookie is found, show the content
+        document.body.style.display = 'block';
+    } else {
+        // If there is no session cookie, redirect to the login page
+        window.location.href = "../Login/login.html";
+    }
+    //--------- END AUTH CHECK ---------
+
+
+
     if (localStorage.getItem("currentTable")) {
         showTable(localStorage.getItem("currentTable"));
     } else {
@@ -15,7 +32,7 @@ var jsonData = null;
 var currentTable = "Drivers";
 
 function logoutPage() {
-    localStorage.setItem("ManagerUserId", "")
+    document.cookie = `ManagerUserId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     localStorage.setItem("currentTable", "Drivers")
     window.location.href='../Login/login.html'
 }

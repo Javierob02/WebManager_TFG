@@ -34,7 +34,10 @@ async function loginUser() {
         if (response.status === 200) {
             console.log("Login successful");
             invalidCredentials.style.display = "none";
-            localStorage.setItem("ManagerUserId", data.userId)
+            var d = new Date();
+            d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = "ManagerUserId" + "=" + data.userId + ";" + expires + ";path=/";
             window.location.href='../Home/home.html'
         } else {
             invalidCredentials.style.display = "block";
@@ -43,4 +46,12 @@ async function loginUser() {
         console.error("Error: ", error);
         // Handle error here
     }
+}
+
+
+function setCookie(cookieName, cookieValue, expirationDays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
 }
