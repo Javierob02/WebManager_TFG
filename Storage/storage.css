@@ -22,6 +22,7 @@ body {
 .tabs {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .tab {
@@ -29,12 +30,21 @@ body {
     cursor: pointer;
     border-radius: 8px 8px 0 0;
     background-color: #e4e7eb;
-    margin-right: 10px;
+    margin: 5px; /* Adjust margin to give some space between tabs */
+    text-align: center;
 }
 
 .tab.active {
     background-color: #ff3f3f;
 }
+
+@media (max-width: 600px) {
+    .tab {
+        flex: 1 1 100%; /* Make each tab take full width on small screens */
+        margin: 2px 0; /* Reduce margin for better spacing on small screens */
+    }
+}
+
 
 
 .body-container {
@@ -90,6 +100,11 @@ button:first-child { /* Style the first button (usually Cancel) */
 table {
     width: 100%;
     border-collapse: collapse;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
 }
 
 th, td {
@@ -257,8 +272,19 @@ input[type="textarea"] {
     display: block;
     margin: 0 auto;
     max-height: 80vh;
+    max-width: 100%;
 }
 
+
+.modal-body {
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensures no overflow */
+    border-radius: 10px; /* Optional: Rounds the corners of the modal */
+}
 
 .modal-body .file-input {
     cursor: pointer;
@@ -267,9 +293,14 @@ input[type="textarea"] {
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, outline 0.3s ease;
+    background-color: transparent; /* Ensures no initial background color */
 }
 
 .modal-body .file-input:hover {
     background-color: #b9b9b9;
+}
+
+.modal-body .file-input:focus {
+    outline: 2px solid #b9b9b9; /* Adds an outline instead of changing background */
 }
