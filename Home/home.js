@@ -210,6 +210,7 @@ function showAddModal(tableName) {
 
     const addButton = document.createElement("button");
     addButton.textContent = "Add";
+    addButton.id = "AddRecordBTN"
     // Add functionality for the Add button based on your requirements (e.g., form submission, data processing)
     addButton.addEventListener("click", function() {
         addButton.disabled = true;
@@ -330,6 +331,7 @@ function showEditModal(tableName, rowId) {
 
     const editButton = document.createElement("button");
     editButton.textContent = "Confirm";
+    editButton.id = "EditRecordBTN"
     // Add functionality for the Add button based on your requirements (e.g., form submission, data processing)
     editButton.addEventListener("click", function() {
         editButton.disabled = true;

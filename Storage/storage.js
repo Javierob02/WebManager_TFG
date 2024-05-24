@@ -569,6 +569,7 @@ function showAddModal(tableName) {
 
     const addButton = document.createElement("button");
     addButton.textContent = "Add";
+    addButton.id = "AddMediaBTN"
     // Add functionality for the Add button based on your requirements (e.g., form submission, data processing)
     addButton.addEventListener("click", function() {
         if (selectedFile != null) {
