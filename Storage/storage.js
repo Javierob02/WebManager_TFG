@@ -14,6 +14,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     //--------- END AUTH CHECK ---------
 
+    //Añade usabilidad de todos elementos con 'onClick' para tabbing
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const targetElement = document.activeElement;
+
+            if (
+                targetElement.tagName === 'BUTTON' ||
+                targetElement.tagName === 'A' ||
+                targetElement.hasAttribute('onclick')
+            ) {
+                event.preventDefault(); // Prevent default form submission
+                targetElement.click(); // Simulate click event
+            }
+        }
+    });
+
+
 
 
     if (localStorage.getItem("currentTableStorage")) {
@@ -114,6 +131,7 @@ function showTable(tableName) {
             // Add table body
             var tbody = table.createTBody();
             var identifier = 1
+            var tabIndex = 11
             let shifter = data.shift();
             data.forEach(rowData => {
                 var fileName = rowData["fileName"]
@@ -122,7 +140,7 @@ function showTable(tableName) {
                     var cell = tr.insertCell();
 
                     if (responseTitles[i] == "fileName") {
-                        cell.innerHTML = `<a href="#" onclick="showViewModal(checkActive(), '${fileName}')" style="color: #f52904">${rowData[responseTitles[i]]}</a>`;
+                        cell.innerHTML = `<a href="#" onclick="showViewModal(checkActive(), '${fileName}')" style="color: #f52904" tabindex="${tabIndex}">${rowData[responseTitles[i]]}</a>`;
                     } else if (responseTitles[i] == "size") {
                         cell.innerHTML = formatBytes(rowData[responseTitles[i]]);
                     } else {
@@ -132,9 +150,10 @@ function showTable(tableName) {
                 }
                 var cell = tr.insertCell();
                 cell.innerHTML = `
-                    <span class="delete-icon" onclick="deleteRow('${fileName}')"></span>
+                    <span class="delete-icon" onclick="deleteRow('${fileName}')" tabindex="${tabIndex + 1}"></span>
                 `;
                 identifier += 1;
+                tabIndex += 2;
             });
         })
         .catch(error => console.error('Error:', error));
@@ -143,11 +162,6 @@ function showTable(tableName) {
 function deleteRow(file) {
     console.log("Delete row with ID: " + file);
     showDeleteModal(checkActive(), file)
-}
-
-function editRow(file) {
-    console.log("Edit row with ID: " + file);
-    showEditModal(checkActive(), file)
 }
 
 function formatBytes(bytes) {
@@ -260,144 +274,6 @@ function showDeleteModal(tableName, file) {
     console.log(jsonData[0])
 }
 
-function showEditModal(tableName, file) {
-    console.log("Mostrando View modal: " + tableName);
-
-    // Create the modal elements
-    const modalContainer= document.createElement("div");
-    modalContainer.classList.add("modal"); // Add a CSS class for styling
-
-    const modalContent = document.createElement("div");
-    modalContent.classList.add("modal-content");
-
-    const modalHeader = document.createElement("div");
-    modalHeader.classList.add("modal-header");
-
-    const modalTitle = document.createElement("h2");
-    modalTitle.innerHTML = "Modify Media Name"
-    modalHeader.appendChild(modalTitle);
-
-    const closeButton = document.createElement("button");
-    closeButton.classList.add("close-button");
-    closeButton.innerHTML = "&times;"; // Close icon using character entity
-    closeButton.addEventListener("click", function() {
-        modalContainer.style.display = "none";
-        modalContainer.remove();
-    });
-    modalHeader.appendChild(closeButton);
-
-    const modalBody = document.createElement("div");
-    modalBody.classList.add("modal-body");
-
-    const lastDotIndex = file.lastIndexOf('.');
-    const fileName = file.substring(0, lastDotIndex);
-    const extension = file.substring(lastDotIndex);
-
-
-    const labelExtension = document.createElement("label");
-    labelExtension.textContent = name;
-    labelExtension.textContent = "File Extension: " + extension
-
-    const labelName = document.createElement("label");
-    labelName.textContent = name;
-    labelName.style.marginTop = "15px"
-    labelName.textContent = "File Name:"
-
-    const inputName = document.createElement("input");
-    inputName.type = "text"; // Adjust input type as needed (e.g., "number" for numeric values)
-    inputName.value = fileName  //Set current file name
-    inputName.name = name;
-    inputName.id = "fileName";
-
-    modalBody.appendChild(labelExtension)
-    modalBody.appendChild(labelName)
-    modalBody.appendChild(inputName)
-
-    const modalFooter = document.createElement("div");
-    modalFooter.classList.add("modal-footer");
-
-    const cancelButton = document.createElement("button");
-    cancelButton.textContent = "Cancel";
-    cancelButton.addEventListener("click", function() {
-        modalContainer.style.display = "none";
-        modalContainer.remove();
-    });
-    modalFooter.appendChild(cancelButton);
-
-    const confirmButton = document.createElement("button");
-    confirmButton.textContent = "Confirm";
-    // Add functionality for the Add button based on your requirements (e.g., form submission, data processing)
-    confirmButton.addEventListener("click", function() {
-        confirmButton.disabled = true;
-
-        fetch('http://localhost:3000/api/getImage/' + tableName + '/' + file)
-            .then(response => response.json())
-            .then(data => {
-                var fileUrl = data.imageUrl;
-
-                fetch('http://localhost:3000/api/deleteFile/' + tableName + '/' + file, {
-                    method: 'DELETE'
-                })
-                    .then(response => response.json())
-                    .then(data => {
-
-                        getFileBlob(fileUrl)
-                            .then(blob => {
-                                var formData = new FormData();
-                                formData.append('file', blob, inputName.value + extension);
-
-                                // Send POST request to upload the file
-                                fetch('http://localhost:3000/api/uploadFile/' + tableName, {
-                                    method: 'POST',
-                                    body: formData
-                                })
-                                    .then(response => {
-                                        if (!response.ok) {
-                                            throw new Error('Failed to upload file');
-                                        }
-                                        return response.json();
-                                    })
-                                    .then(data => {
-                                        console.log('File uploaded successfully:', data);
-                                        modalContainer.style.display = "none";
-                                        modalContainer.remove();
-                                        window.location.reload();
-                                    })
-                                    .catch(error => {
-                                        console.error('Error uploading file:', error);
-                                        // Handle the error as needed
-                                    });
-                            })
-                            .catch(error => {
-                                console.error('Error fetching file content:', error);
-                                // Handle the error as needed
-                            });
-
-
-
-                    })
-                    .catch(error => console.error('Error:', error));
-
-            })
-            .catch(error => console.error('Error:', error));
-
-
-    });
-    modalFooter.appendChild(confirmButton);
-
-    // Assemble the modal content
-    modalContent.appendChild(modalHeader);
-    modalContent.appendChild(modalBody);
-    modalContent.appendChild(modalFooter);
-
-    // Add the modal content to the container and make it visible
-    modalContainer.appendChild(modalContent);
-    document.body.appendChild(modalContainer);
-    modalContainer.style.display = "block"; // Display the modal
-    console.log(jsonData)
-    console.log(jsonData[0])
-}
-
 function showViewModal(tableName, file) {
     console.log("Mostrando View modal: " + tableName);
 
@@ -444,10 +320,12 @@ function showViewModal(tableName, file) {
 
             if (data.imageType.includes("image/")) {    //Image
                 fileIMG.src = data.imageUrl;
+                fileIMG.alt = `Imagen con nombre ` + file
                 modalBody.appendChild(fileIMG);
             } else if (data.imageType.includes("video/")) { //video
                 fileVIDEO.src = data.imageUrl;
                 fileVIDEO.controls = true;
+                fileVIDEO.alt = `Video con nombre ` + file
                 modalBody.appendChild(fileVIDEO);
             } else {
                 //Ignore

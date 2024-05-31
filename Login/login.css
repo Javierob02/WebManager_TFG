@@ -99,6 +99,6 @@ button{
     cursor: pointer;
 }
 
-button:hover {
+button:hover, button:focus {
     background-color: #ff3f3f;
 }

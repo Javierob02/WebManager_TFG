@@ -11,19 +11,19 @@
 </head>
 <body>
 <div class="background">
-    <div class="shape"></div>
-    <div class="shape"></div>
+    <div class="shape" aria-hidden="true"></div>
+    <div class="shape" aria-hidden="true"></div>
 </div>
 <form>
-    <h3>Login Here</h3>
+    <h3 aria-level="1">Login Here</h3>
 
     <label for="username">Username</label>
-    <input type="text" placeholder="Email or Phone" id="username">
+    <input type="text" placeholder="Email or Phone" id="username" aria-label="Enter your username or phone number" tabindex="1">
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
+    <input type="password" placeholder="Password" id="password" aria-label="Enter your password" tabindex="2">
 
-    <button type="button" id="LoginBTN" onclick="loginUser()">Log In</button>
+    <button type="button" id="LoginBTN" onclick="loginUser()" tabindex="3" aria-label="Log In">Log In</button>
 
     <p id="invalidCredentials" style="display: none; color: red; text-align: center; margin-top: 20px;">Invalid Credentials</p>
 </form>

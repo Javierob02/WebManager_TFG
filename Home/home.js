@@ -14,6 +14,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     //--------- END AUTH CHECK ---------
 
+    //Añade usabilidad de todos elementos con 'onClick' para tabbing
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const targetElement = document.activeElement;
+
+            if (
+                targetElement.tagName === 'BUTTON' ||
+                targetElement.tagName === 'A' ||
+                targetElement.hasAttribute('onclick')
+            ) {
+                event.preventDefault(); // Prevent default form submission
+                targetElement.click(); // Simulate click event
+            }
+        }
+    });
+
 
 
     if (localStorage.getItem("currentTable")) {
@@ -91,6 +107,7 @@ function showTable(tableName) {
             // Add table body
             var tbody = table.createTBody();
             var identifier = 1
+            var indexTab = 11
             data.forEach(rowData => {
                 var tr = tbody.insertRow();
                 for (var i = 0; i < eval(tableName).length; i++) {
@@ -99,10 +116,11 @@ function showTable(tableName) {
                 }
                 var cell = tr.insertCell();
                 cell.innerHTML = `
-                    <span class="edit-icon" onclick="editRow(${identifier})"></span>
-                    <span class="delete-icon" onclick="deleteRow(${identifier})"></span>
+                    <span class="edit-icon" onclick="editRow(${identifier})" tabindex="${indexTab}"></span>
+                    <span class="delete-icon" onclick="deleteRow(${identifier})" tabindex="${indexTab + 1}"></span>
                 `;
                 identifier += 1;
+                indexTab += 2;
             });
         })
         .catch(error => console.error('Error:', error));
