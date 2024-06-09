@@ -26,14 +26,14 @@
 
 Cypress.Commands.add('login', (no_visit) => {
     cy.visit('/Login/login.html');
-    cy.get('#username').click({force:true}).clear({force:true}).type('admin@f1fans.com', {force:true});
-    cy.get('#password').click({force:true}).clear({force:true}).type('123456', {force:true});
+    cy.get('#username').click({force:true}).clear({force:true}).type('username', {force:true});
+    cy.get('#password').click({force:true}).clear({force:true}).type('password', {force:true});
     cy.get('#LoginBTN').click({force:true});
 })
 
 Cypress.Commands.add('loginIncorrect', (no_visit) => {
     cy.visit('/Login/login.html');
-    cy.get('#username').click({force:true}).clear({force:true}).type('admin@f1fans.com', {force:true});
-    cy.get('#password').click({force:true}).clear({force:true}).type('1234567', {force:true});
+    cy.get('#username').click({force:true}).clear({force:true}).type('incorrectas', {force:true});
+    cy.get('#password').click({force:true}).clear({force:true}).type('puesNO', {force:true});
     cy.get('#LoginBTN').click({force:true});
 })
