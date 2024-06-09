@@ -69,7 +69,7 @@ describe('Storage Manager Test', () => {
     cy.get('#test').click({force:true});
     cy.wait(5000);
     
-    cy.contains('IMG_1298').click({force:true});
+    cy.contains('7A01B21F-289A-4C68-BB2C-867B06EDECEA').click({force:true});
     cy.wait(100);
 
     cy.get('img').should('have.attr', 'src').and('not.be.empty');
